@@ -82,15 +82,11 @@ public class VikingLambdaService {
         return findAllWithEquipmentQuality(LEGENDARY_QUALITY);
     }
 
-    public List<Viking> findByHairColorSortedByAge(HairColor hairColor) {
+    public List<Viking> findRedBeardedSortedByAge() {
         return vikingStorage.findAll().stream()
-                .filter(viking -> viking.hairColor() == hairColor)
+                .filter(viking -> viking.hairColor() == HairColor.Red)
                 .sorted(Comparator.comparingInt(Viking::age))
                 .toList();
-    }
-
-    public List<Viking> findRedBeardedSortedByAge() {
-        return findByHairColorSortedByAge(HairColor.Red);
     }
 
     public Optional<Integer> findMaxIdFromArray() {
