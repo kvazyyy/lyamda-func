@@ -1,7 +1,7 @@
 package ru.mephi.vikingdemo.gui;
 
 import ru.mephi.vikingdemo.model.BeardStyle;
-import ru.mephi.vikingdemo.model.EquipmentItem;
+import ru.mephi.vikingdemo.model.EquipmentItem;    
 import ru.mephi.vikingdemo.model.HairColor;
 import ru.mephi.vikingdemo.model.Viking;
 import ru.mephi.vikingdemo.service.VikingLambdaService;
@@ -145,12 +145,11 @@ public class VikingLambdaInfoFrame extends JFrame {
                 legendaryButton
         ));
 
-        JButton sortedByHairButton = new JButton("Показать");
-        sortedByHairButton.addActionListener(event -> runSortedByHairColor());
+        JButton redBeardedButton = new JButton("Показать");
+        redBeardedButton.addActionListener(event -> runRedBeardedSortedByAge());
         controls.add(createRow(
-                new JLabel("Сортированный по возрасту список с цветом волос:"),
-                sortedHairColorBox,
-                sortedByHairButton
+                new JLabel("Сортированный по возрасту список рыжебородых викингов:"),
+                redBeardedButton
         ));
 
         JButton clearButton = new JButton("Очистить вывод");
@@ -331,4 +330,20 @@ public class VikingLambdaInfoFrame extends JFrame {
         outputArea.append(text + "\n\n");
         outputArea.setCaretPosition(outputArea.getDocument().getLength());
     }
+    private void runRedBeardedSortedByAge() {
+    List<Viking> vikings = lambdaService.findRedBeardedSortedByAge();
+
+    StringBuilder result = new StringBuilder();
+    result.append("Сортированный по возрасту список рыжебородых викингов:\n");
+
+    if (vikings.isEmpty()) {
+        result.append("Подходящие викинги не найдены");
+    } else {
+        vikings.forEach(viking ->
+                result.append(formatViking(viking)).append("\n")
+        );
+    }
+
+    outputArea.setText(result.toString());
+}
 }
