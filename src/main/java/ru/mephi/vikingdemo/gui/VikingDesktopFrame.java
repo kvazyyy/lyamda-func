@@ -47,8 +47,8 @@ public class VikingDesktopFrame extends JFrame {
         JButton generateButton = new JButton("Generate vikings");
         generateButton.addActionListener(event -> onGenerateVikings());
 
-        JButton lambdaInfoButton = new JButton("Open lambda report");
-        lambdaInfoButton.addActionListener(event -> onOpenLambdaReport());
+        JButton lambdaInfoButton = new JButton("Open lambda analytics");
+        lambdaInfoButton.addActionListener(event -> onOpenLambdaPage());
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.add(createButton);
@@ -66,6 +66,7 @@ public class VikingDesktopFrame extends JFrame {
 
     private void onGenerateVikings() {
         String value = JOptionPane.showInputDialog(this, "Введите количество викингов для генерации:", "20");
+
         if (value == null) {
             return;
         }
@@ -81,7 +82,7 @@ public class VikingDesktopFrame extends JFrame {
         }
     }
 
-    private void onOpenLambdaReport() {
+    private void onOpenLambdaPage() {
         VikingLambdaInfoFrame frame = new VikingLambdaInfoFrame(vikingLambdaService);
         frame.setVisible(true);
     }
